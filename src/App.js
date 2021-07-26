@@ -11,6 +11,7 @@ import AddContact from './Components/contacts/AddContact'
 import {BrowserRouter as Router , Route, Switch} from 'react-router-dom'
 import About from './Components/Pages/About'
 import PageNotFound from './Components/Pages/PageNotFound'
+import EditContact from './Components/contacts/EditContact'
 
 class App extends Component {
   render(){
@@ -23,6 +24,7 @@ class App extends Component {
               <Navbar />
               <Switch>
                   <Route exact path ="/contact/add" component = {AddContact}/>
+                  <Route exact path ="/contact/edit/:id" component = {EditContact}/>
                   <Route exact path ="/About/:id" component = {About}/>
                   <Route exactpath ="/" component = {Contacts}/>
                   <Route component = {PageNotFound}/>

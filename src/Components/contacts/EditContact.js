@@ -5,7 +5,7 @@ import TextInputGroup  from '../helpers/TextInputGroup'
 
 import axios from 'axios'
 
- class AddContact extends Component {
+ class EditContact extends Component {
 
      state = {
         name: '',
@@ -16,7 +16,7 @@ import axios from 'axios'
 
     componentDidMount(){
         const id = this.props.match.params.id;
-        
+
     }
 
     onChangeInput = (e) => this.setState({[e.target.name]: e.target.value })

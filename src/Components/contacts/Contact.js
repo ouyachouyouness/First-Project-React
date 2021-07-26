@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import './Contact.css'
 import {Consumer} from '../Context'
 import axios from 'axios'
+import  {Link} from 'react-router-dom';
 
 
  class Contact extends Component {
@@ -45,6 +46,18 @@ catch(e){
             
             {name} <i onClick={ this.showContact.bind(this, name) } className = "fa fa-sort-down" style= {{cursor: 'pointer'}}></i>
             
+
+            <Link to={`/contact/edit/${id}`}>
+              <i className = "fa fa-pencil" style = {{
+                color: 'orange',
+                float: 'right',
+                cursor: 'pointer',
+                marginLeft: '8px' 
+                
+                }}> 
+
+              </i>
+            </Link>
             <i style = {{color: 'red', float: 'right', cursor: 'pointer'}} className="fa fa-times" aria-hidden="true" 
              onClick = {this.onDeleteClick.bind(this, id, dispatch)}
             ></i>
