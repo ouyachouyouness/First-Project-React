@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import './Contact.css'
 import {Consumer} from '../Context'
+import axios from 'axios'
 
 
  class Contact extends Component {
@@ -10,12 +11,20 @@ import {Consumer} from '../Context'
     showContactToggle : true
   }
 
-  onDeleteClick = (id , dispatch) => {
-    dispatch({
-      type: 'DELETE_CONTACT',
-      payload: id
-    })
+  onDeleteClick = async (id , dispatch) => {
+    try{
+
+    const res = await axios.delete('https://jsonplaceholder.typicode.com/users/'+ id)
+      dispatch({
+        type: 'DELETE_CONTACT',
+        payload: id
+      })
   }
+
+catch(e){
+  console.log(e)
+}
+}
 
     showContact(myMmessage){
       this.setState({

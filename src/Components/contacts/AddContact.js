@@ -3,6 +3,8 @@ import {Consumer} from '../Context'
 
 import TextInputGroup  from '../helpers/TextInputGroup'
 
+import axios from 'axios'
+
  class AddContact extends Component {
 
      state = {
@@ -14,7 +16,7 @@ import TextInputGroup  from '../helpers/TextInputGroup'
 
     onChangeInput = (e) => this.setState({[e.target.name]: e.target.value })
 
-    submit = (dispatch,e) => {
+    submit = async (dispatch,e) => {
         e.preventDefault();
 
         const {name, email, phone} = this.state
@@ -31,16 +33,26 @@ import TextInputGroup  from '../helpers/TextInputGroup'
             this.setState({errors : {phone: "the phone is required"}})
             return;
         }
+        const newContact = {
+            name : this.state.name,
+            email : this.state.email,
+            phone : this.state.phone
+        }
+        try{
 
-        dispatch({
+        const res = await axios.post("https://jsonplaceholder.typicode.com/users", newContact)
+          dispatch({
             type: "Add_CONTACT",
-            payload: {
-                id : 10,
-                name : this.state.name,
-                email : this.state.email,
-                phone : this.state.phone
-            }
-        })
+            payload: res.data
+        });
+    }
+    catch(e){
+        console.log(e)
+    }
+          
+        
+
+        
 
         this.setState({
             name: '',
