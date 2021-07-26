@@ -5,7 +5,7 @@ import TextInputGroup  from '../helpers/TextInputGroup'
 
 import axios from 'axios'
 
- class EditContact extends Component {
+ class AddContact extends Component {
 
      state = {
         name: '',
@@ -14,9 +14,15 @@ import axios from 'axios'
         errors: {}
     }
 
-    componentDidMount(){
+    async componentDidMount(){
         const id = this.props.match.params.id;
 
+        const res = await axios.get(`https://jsonplaceholder.typicode.com/users/${id}`)
+        this.setState({
+            name: res.data.name,
+            email: res.data.email,
+            phone: res.data.phone
+        })
     }
 
     onChangeInput = (e) => this.setState({[e.target.name]: e.target.value })
@@ -38,16 +44,18 @@ import axios from 'axios'
             this.setState({errors : {phone: "the phone is required"}})
             return;
         }
-        const newContact = {
+        const upContact = {
             name : this.state.name,
             email : this.state.email,
             phone : this.state.phone
         }
+        const id = this.props.match.params.id; 
+
         try{
 
-        const res = await axios.post("https://jsonplaceholder.typicode.com/users", newContact)
+        const res = await axios.put(`https://jsonplaceholder.typicode.com/users/${id}`, upContact)
           dispatch({
-            type: "Add_CONTACT",
+            type: "UPDATE_CONTACT",
             payload: res.data
         });
     }
