@@ -6,6 +6,8 @@ export default function PageNotFound() {
     <div>
      <h2> pAGE nOT fOUND</h2>
      <Link to ="/"> Back to home</Link>
+     <h2>let go</h2>
     </div>
+    
   );
 }
